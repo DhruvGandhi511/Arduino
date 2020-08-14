@@ -1,0 +1,117 @@
+#include <Keypad.h>
+
+const byte ROWS = 4; 
+const byte COLS = 4; 
+
+char hexaKeys[ROWS][COLS] = {
+  {'1', '2', '3', 'A'},
+  {'4', '5', '6', 'B'},
+  {'7', '8', '9', 'C'},
+  {'*', '0', '#', 'D'}
+};
+
+byte rowPins[ROWS] = {9, 8, 7, 6}; 
+byte colPins[COLS] = {5, 4, 3, 2}; 
+
+Keypad pad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
+int LM1=10;
+int LM2=11;
+int RM1=12;
+int RM2=13;
+void setup(){
+    Serial.begin(9600);
+	pinMode(LM1,OUTPUT);
+  	pinMode(LM2,OUTPUT);
+    pinMode(RM1,OUTPUT);
+  	pinMode(RM2,OUTPUT);
+  	digitalWrite(LM1,LOW);
+  	digitalWrite(LM2,LOW);
+  	digitalWrite(RM1,LOW);
+  	digitalWrite(RM2,LOW);
+
+}
+void loop(){
+  char key = pad.getKey();
+  
+    if(key == '0')
+    {
+  
+  
+    digitalWrite(LM1, LOW);
+
+    digitalWrite(LM2, LOW);
+
+    digitalWrite(RM1, LOW);
+
+    digitalWrite(RM2, LOW);
+    delay(1000);
+    }
+    if(key=='1')
+    {
+
+ 
+                          //forwar 
+
+    digitalWrite(LM1, HIGH);
+
+    digitalWrite(LM2, LOW);
+
+    digitalWrite(RM1, HIGH);
+
+    digitalWrite(RM2, LOW);
+    delay(1000);
+    }
+    if(key=='2')
+    {
+
+
+                            //backward
+
+   
+
+    digitalWrite(LM1, LOW);
+
+    digitalWrite(LM2, HIGH);
+
+    digitalWrite(RM1, LOW);
+
+    digitalWrite(RM2, HIGH);
+    delay(1000);
+    }
+    if(key=='3')
+    {
+
+ 
+                                // left
+
+
+
+    digitalWrite(LM1, HIGH);
+
+    digitalWrite(LM2, LOW);
+
+    digitalWrite(RM1, LOW);
+
+    digitalWrite(RM2, LOW);
+    delay(1000);
+    }
+    if(key=='4')
+    {
+    
+
+                                     // right
+
+
+
+    digitalWrite(LM1, LOW);
+
+    digitalWrite(LM2, LOW);
+
+    digitalWrite(RM1, HIGH);
+
+    digitalWrite(RM2, LOW);
+    delay(1000);
+    }
+
+
+}
