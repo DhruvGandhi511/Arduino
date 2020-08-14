@@ -1,0 +1,44 @@
+#include <LiquidCrystal.h>          
+LiquidCrystal lcd(12,11,10,9,8,7); 
+const int triggerpin = 2;     
+const int echopin = 3; 
+int ledpin = 13;
+int time;                   
+int S;
+String x;
+void setup() {
+lcd.begin(16,2);              
+pinMode(triggerpin, OUTPUT);  
+pinMode(echopin, INPUT);
+pinMode(ledpin , OUTPUT);
+Serial.begin(9600);       
+}
+void loop() {
+lcd.clear();
+digitalWrite(triggerpin, LOW);  
+delayMicroseconds(2);
+digitalWrite(triggerpin, HIGH); 
+delayMicroseconds(10);
+digitalWrite(triggerpin, LOW);
+time = pulseIn(echopin, HIGH); 
+S= time*0.034/2;                        
+lcd.setCursor(0,0);             
+lcd.print("Distance: "); 
+lcd.print(S); 
+lcd.print(" cm");
+delay(1000);
+if(Serial.available()!=0)
+{
+  x=Serial.readString();
+}
+if(S==x.toInt())
+{
+  digitalWrite(ledpin, HIGH);
+}
+else
+{
+  digitalWrite(ledpin,LOW);
+}
+  
+
+}
